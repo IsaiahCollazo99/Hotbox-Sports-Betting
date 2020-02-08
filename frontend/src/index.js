@@ -1,7 +1,16 @@
 // import axios from "axios"
 let userId = sessionStorage.getItem("userId");
+let search = document.querySelector("#searchForm");
 if(!userId) userId = 1;
-let postsArr = []
+let posts = {};
+const fetchData = async (url, cb) => {
+    try {
+        let res = await axios.get(url);
+        cb(res.data);
+    } catch(err) {
+        console.log(err);
+    }
+} // End of fetchData() function
 
 const getUser = async () => {
     try {
@@ -74,3 +83,9 @@ const setupPage = async () => {
 }
 
 setupPage()
+
+search.addEventListener("submit", (e => {
+    e.preventDefault();
+    sessionStorage.setItem("userQuery", e.target.children[0].value);
+    window.location.href = "./pages/searchResults/searchResults.html";
+}))

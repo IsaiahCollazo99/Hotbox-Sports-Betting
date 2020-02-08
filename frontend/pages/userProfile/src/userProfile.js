@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let sectRecord = document.querySelector("#displayRecord");
     let sectFollowers = document.querySelector("#displayFollowers");
     let sectFollowed = document.querySelector("#displayFollowed");
+    let search = document.querySelector("#searchForm");
     // const userId = sessionStorage.getItem("userId"); 
     const userId = 1
 
@@ -82,4 +83,11 @@ getUserFollowed()
 getUserFollowers()
 showUserPosts()
 showUserInfo()
+
+search.addEventListener("submit", (e => {
+    e.preventDefault();
+    sessionStorage.setItem("userQuery", e.target.children[0].value);
+    window.location.href = "./../searchResults/searchResults.html";
+}))
 })
+
