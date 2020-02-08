@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let sectFollowers = document.querySelector("#displayFollowers");
     let sectFollowed = document.querySelector("#displayFollowed");
     let search = document.querySelector("#searchForm");
-    // const userId = sessionStorage.getItem("userId"); 
-    const userId = 1
+    const userId = sessionStorage.getItem("userId"); 
+    if(!userId) userId = 1
 
     const showUserInfo = async () => {
         try {
@@ -84,10 +84,10 @@ getUserFollowers()
 showUserPosts()
 showUserInfo()
 
-search.addEventListener("submit", (e => {
-    e.preventDefault();
-    sessionStorage.setItem("userQuery", e.target.children[0].value);
-    window.location.href = "./../searchResults/searchResults.html";
-}))
+    search.addEventListener("submit", (e => {
+        e.preventDefault();
+        sessionStorage.setItem("userQuery", e.target.children[0].value);
+        window.location.href = "./../searchResults/searchResults.html";
+    }))
 })
 
