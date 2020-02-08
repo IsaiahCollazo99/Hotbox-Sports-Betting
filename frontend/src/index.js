@@ -3,28 +3,6 @@ let userId = sessionStorage.getItem("userId");
 if(!userId) {userId = 1}
 let postsArr = []
 
-// const getFollowing = async () => {
-//     try {
-//         let res = await axios.get(`http://localhost:3000/users/${userId}/followings/followingCount`) 
-//         let following = res.data.following[0]
-//         return following.userfollowingcount;
-         
-//     } catch(error) {
-//         console.log(error)
-//     }
-// }
-// getFollowing()
-// const getFollowers = async () => {
-//     try {
-//         let res = await axios.get(`http://localhost:3000/users/${userId}/followings/followerCount`) 
-//         // debugger
-//         let followers = res.data.follower[0];
-//         return followers.userfollowercount; 
-//     } catch(error) {
-//         console.log(error)
-//     }
-// }
-// getFollowers()
 const getUser = async () => {
     try {
         let res = await axios.get(`http://localhost:3000/users/${userId}/posts`) 
@@ -37,7 +15,6 @@ const getPosts = async () => {
     try {
         let res = await axios.get(`http://localhost:3000/users/${userId}/posts`) 
         let posts = res.data.post;
-        // debugger
         posts.filter(post => {
             console.log(post);
             postsArr.push({posterId: post.id, body: post.body, timestamp: post.creation_date})
