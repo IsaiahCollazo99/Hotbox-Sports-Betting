@@ -7,6 +7,7 @@ let betAmount = document.querySelector("#betAmount");
 let betForm = document.querySelector("#betForm");
 let betFormResposne = document.querySelector("#betFormResponse");
 let betFeed = document.querySelector("#betsFeed");
+let search = document.querySelector("#searchForm");
 let games = {};
 
 const fetchData = async (url, cb) => {
@@ -148,3 +149,9 @@ betForm.addEventListener("submit", async (e) => {
 })
 
 getData();
+
+search.addEventListener("submit", (e => {
+    e.preventDefault();
+    sessionStorage.setItem("userQuery", e.target.children[0].value);
+    window.location.href = "./../searchResults/searchResults.html";
+}))
