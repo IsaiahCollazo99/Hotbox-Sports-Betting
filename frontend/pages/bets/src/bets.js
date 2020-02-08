@@ -1,5 +1,5 @@
 let userId = sessionStorage.getItem("userId");
-if(!userId) userId = 2;
+if(!userId) userId = 1;
 let upcomingGames = document.querySelector(".upcomingGames");
 let gameSelect = document.querySelector("#betGame");
 let teamSelect = document.querySelector("#betTeam");
@@ -47,11 +47,21 @@ const takeBet = async (e) => {
         let h1 = document.createElement("h1");
         h1.innerText = "Took the bet!";
         betFormResposne.appendChild(h1);
+        if(await betWin()) {
+            // Update the users win ratio and the betters loss ratio
+        } else {
+            // Update the users loss ratio and the betters loss ratio
+        }
         await fetchData("http://localhost:3000/bets", populateBetsFeed);
     } catch(err) {
         console.log(err);
     }
 } // End of takeBet() function
+
+const betWin = async () => {
+    if(Math.floor(Math.random() * 2)) return true;
+    else return false
+} // End of betWin() function
 
 const populateBetsFeed = (data) => {
     let bets = data.bets;
