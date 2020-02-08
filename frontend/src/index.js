@@ -1,6 +1,6 @@
 // import axios from "axios"
 let userId = sessionStorage.getItem("userId");
-if(!userId) {userId = 1}
+if(!userId) userId = 1;
 let postsArr = []
 
 const getUser = async () => {
@@ -56,6 +56,7 @@ const populateNewsFeed = async () => {
         section1.appendChild(section2)
         
     })
+    
     form.addEventListener("submit", (e) => {
         e.preventDefault()
         let addComment = e.target.children[0].value
