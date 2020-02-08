@@ -56,7 +56,7 @@ const populateNewsFeed = async () => {
         section1.appendChild(section2)
         
     })
-    
+
     form.addEventListener("submit", (e) => {
         e.preventDefault()
         let addComment = e.target.children[0].value
@@ -72,18 +72,5 @@ const setupPage = async () => {
     await getPosts()
     await populateNewsFeed()
 }
+
 setupPage()
-
-
-
-
-
-// let p1 = document.createElement("p1")
-// let p2 = document.createElement("p2")
-
-// p1.innerText = await getFollowers() //gets Users Followers and appends 
-// followers.appendChild(p1)
-// debugger
-// // let p = document.createElement("p")
-// p2.innerText = await getFollowing();
-// following.appendChild(p2)
