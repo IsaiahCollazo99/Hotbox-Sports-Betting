@@ -106,10 +106,15 @@ const deleteUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
     try {
-        let {betHistory} = req.body;
+        let {bet_wins, bet_losses} = req.body;
         let {userId} = req.params;
         if(await isUserExisting(userId)) {
-            let updatedUser = await db.one("UPDATE users SET bet_history=$1 WHERE id=$2 RETURNING *", [betHistory, userId]);
+            let updatedUser;
+            if(bet_wins) {
+                updatedUser = await db.one("UPDATE users SET bet_wins=bet_wins+1 WHERE id=$1 RETURNING *", [userId]);
+            } else {
+                updatedUser = await db.one("UPDATE users SET bet_losses=$1 WHERE id=$2 RETURNING *", [bet_losses, userId]);
+            }
             res.json({
                 status: "success",
                 message: "update user",
