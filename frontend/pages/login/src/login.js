@@ -31,7 +31,7 @@ logInForm.addEventListener("submit", async (e) => {
         loginH1.innerText = "Please fill out all the information";
         loginH1.style.color = "#940E06";
     } else {
-        fetchData(`http://localhost:3000/users/logins?username=${loginUser.value}&password=${loginPass.value}`, checkLogin);
+        fetchData(`http://localhost:3000/users/logins?username=${loginUser}&password=${loginPass}`, checkLogin);
     }
 })
 
