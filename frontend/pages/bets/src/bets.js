@@ -1,5 +1,5 @@
 let userId = sessionStorage.getItem("userId");
-if(!userId) userId = 2;
+if(!userId) userId = 1;
 let upcomingGames = document.querySelector(".upcomingGames");
 let gameSelect = document.querySelector("#betGame");
 let teamSelect = document.querySelector("#betTeam");
@@ -47,11 +47,39 @@ const takeBet = async (e) => {
         let h1 = document.createElement("h1");
         h1.innerText = "Took the bet!";
         betFormResposne.appendChild(h1);
+        if(betWin()) {
+            try {
+                let taker = await axios.patch(`http://localhost:3000/users/${userId}`, {bet_wins: 1});
+                let bet = await axios.get(`http://localhost:3000/bets/${betId}`);
+                let better = await axios.patch(`http://localhost:3000/users/${bet.data.bet.better_id}`, {bet_losses: 1});
+                let win = document.createElement("h1");
+                win.innerText = "You won the bet!";
+                betFormResposne.appendChild(win);
+            } catch(err) {
+                console.log(err);
+            }
+        } else {
+            try {
+                let bet = await axios.get(`http://localhost:3000/bets/${betId}`);
+                let better = await axios.patch(`http://localhost:3000/users/${bet.data.bet.better_id}`, {bet_wins: 1});
+                let taker = await axios.patch(`http://localhost:3000/users/${userId}`, {bet_losses: 1});                
+                let lose = document.createElement("h1");
+                lose.innerText = "You lost the bet!";
+                betFormResposne.appendChild(lose);
+            } catch(err) {
+                console.log(err);
+            }
+        }
         await fetchData("http://localhost:3000/bets", populateBetsFeed);
     } catch(err) {
         console.log(err);
     }
 } // End of takeBet() function
+
+const betWin = () => {
+    if(Math.floor(Math.random() * 2)) return true;
+    else return false
+} // End of betWin() function
 
 const populateBetsFeed = (data) => {
     let bets = data.bets;
