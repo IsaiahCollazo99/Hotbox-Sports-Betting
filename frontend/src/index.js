@@ -46,10 +46,14 @@ const populateNewsFeed = async () => {
         let postSection = document.createElement("section");
         postSection.className = "postSection";
 
-        let postUser = document.createElement("h4");
+        let postSectionTop = document.createElement("section");
+        postSectionTop.className = "postTop";
+
+        let postUser = document.createElement("a");
         postUser.innerText = poster.full_name;
         postUser.className = "poster";
-        postSection.appendChild(postUser);
+        postUser.href = "./pages/userProfile/userProfile.html";
+        postSectionTop.appendChild(postUser);
 
         if(Number(userId) === poster.id) {
             let postButtons = document.createElement("section");
@@ -66,29 +70,31 @@ const populateNewsFeed = async () => {
             postButtons.appendChild(editButton);
             postButtons.appendChild(deleteButton)
 
-            postSection.appendChild(postButtons);
+            postSectionTop.appendChild(postButtons);
         }
 
-        let postTimestamp = document.createElement("p");
-        postTimestamp.innerText = post.creation_date;
-        postTimestamp.className = "postTimestamp";
-        postSection.appendChild(postTimestamp);
+        postSection.appendChild(postSectionTop);
+        let postSectionBott = document.createElement("section");
+        postSectionBott.className = "postBottom";
 
         let postBody = document.createElement("p");
         postBody.innerText = post.body;
         postBody.classname = "postBody";
-        postSection.appendChild(postBody);
+        postSectionBott.appendChild(postBody);
 
         let commentsButton = document.createElement("button");
         commentsButton.innerText = "Comments";
         commentsButton.onclick = showComments;
-        postSection.appendChild(commentsButton);
+        commentsButton.className = "commentsButton"
+        postSectionBott.appendChild(commentsButton);
 
         let likesButton = document.createElement("button");
         likesButton.innerText = "Likes";
         likesButton.onclick = showLikes;
-        postSection.appendChild(likesButton);
+        likesButton.className = "likesButton";
+        postSectionBott.appendChild(likesButton);
 
+        postSection.appendChild(postSectionBott);
         newsFeed.appendChild(postSection);
     }
 } // End of populateNewsFeed() function
