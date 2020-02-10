@@ -3,8 +3,10 @@ let search = document.querySelector("#searchForm");
 if(!userId) userId = 1;
 let posts = {};
 let userFollowing = {};
+let games = {};
 
 let newsFeed = document.querySelector("#newsFeed");
+let upcomingGames = document.querySelector("#upcomingGames");
 
 const fetchData = async (url, cb) => {
     try {
@@ -99,6 +101,18 @@ const populateNewsFeed = async () => {
     }
 } // End of populateNewsFeed() function
 
+const populateUpcomingGames = async (data) => {
+    data.forEach(event => {
+        let section = document.createElement("section");
+        section.className = "upcomingSection";
+        let h3 = document.createElement("h3");
+        h3.innerHTML = `${event.teams[0].name} <span style="color:#FDB927">VS.</span> ${event.teams[1].name}`;
+        section.appendChild(h3);
+        upcomingGames.appendChild(section);
+        games[event.event_id] = event.teams;
+    })
+} // End of populateUpcomingGames() function
+
 const editPost = (e) => {
 
 } // End of editPost() function
@@ -126,6 +140,7 @@ const setupPage = async () => {
     await fetchData("http://localhost:3000/users/" + userId, getUser);
     await fetchData("http://localhost:3000/users/" + userId + "/followings", getFollowing);
     await populateNewsFeed()
+    await fetchData("http://localhost:3000/events", populateUpcomingGames);
 } // End of setupPage() function
 
 setupPage()
