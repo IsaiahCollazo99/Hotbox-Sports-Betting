@@ -2,6 +2,7 @@ let userId = sessionStorage.getItem("userId");
 let search = document.querySelector("#searchForm");
 if(!userId) userId = 1;
 let posts = {};
+let userFollowing = {};
 
 const fetchData = async (url, cb) => {
     try {
@@ -13,8 +14,17 @@ const fetchData = async (url, cb) => {
 } // End of fetchData() function
 
 const getFollowing = (data) => {
-    debugger;
+    let following = data.followings;
+
+    following.forEach(async (user) => {
+        userFollowing[user.id] = user;
+        await fetchData("http://localhost:3000/users" + user.id + "/posts", getUserPosts);
+    })
 } // End of getFollowing() function
+
+const getUserPosts = (data) => {
+    debugger;
+} // End of getUserPosts() function
 
 const addComment = (e) => {
     e.preventDefault()
