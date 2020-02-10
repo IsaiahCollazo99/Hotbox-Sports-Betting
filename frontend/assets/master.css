@@ -129,6 +129,10 @@ input[type="text"]:focus, input[type="search"]:focus {
     border-radius: 10px;
 }
 
+#newsFeed {
+    padding: 10px;
+}
+
 .postSection {
     background-color:rgba(6,25,31,1);
     margin-top: 30px;
@@ -139,6 +143,8 @@ input[type="text"]:focus, input[type="search"]:focus {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .postTop {
@@ -151,7 +157,7 @@ input[type="text"]:focus, input[type="search"]:focus {
 .poster {
     color: #FDB927;
     text-decoration: none;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Exo 2', sans-serif;
 }
 
 .poster:hover {
