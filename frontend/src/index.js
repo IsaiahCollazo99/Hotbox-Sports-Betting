@@ -18,12 +18,15 @@ const getFollowing = (data) => {
 
     following.forEach(async (user) => {
         userFollowing[user.id] = user;
-        await fetchData("http://localhost:3000/users" + user.id + "/posts", getUserPosts);
+        await fetchData(`http://localhost:3000/users/${user.id}/posts`, getUserPosts);
     })
 } // End of getFollowing() function
 
 const getUserPosts = (data) => {
-    debugger;
+    let userPosts = data.posts;
+    userPosts.forEach(post => {
+        posts[post.id] = post;
+    })
 } // End of getUserPosts() function
 
 const addComment = (e) => {
