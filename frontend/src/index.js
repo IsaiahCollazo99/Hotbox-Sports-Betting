@@ -16,7 +16,6 @@ let upcomingGames = document.querySelector("#upcomingGames");
 const fetchData = async (url, cb) => {
     try {
         let res = await axios.get(url);
-        debugger;
         cb(res.data);
     } catch(err) {
         console.log(err);
@@ -48,7 +47,6 @@ const getUserPosts = async (data) => {
 const populateNewsFeed = async () => {
     newsFeed.innerHTML = "<h1>News Feed</h1>";
     for(let key in posts) {
-        debugger;
         let post = posts[key];
         let poster = userFollowing[post.poster_id];
 
