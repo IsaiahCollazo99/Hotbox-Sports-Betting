@@ -1,8 +1,8 @@
-// import axios from "axios"
 let userId = sessionStorage.getItem("userId");
 let search = document.querySelector("#searchForm");
 if(!userId) userId = 1;
 let posts = {};
+
 const fetchData = async (url, cb) => {
     try {
         let res = await axios.get(url);
@@ -19,19 +19,19 @@ const getUser = async () => {
     } catch(error) {
         console.log(error)
     }
-}
+} // End of getUser() function
+
 const getPosts = async () => {
     try {
         let res = await axios.get(`http://localhost:3000/users/${userId}/posts`) 
         let posts = res.data.post;
         posts.filter(post => {
-            console.log(post);
             postsArr.push({posterId: post.id, body: post.body, timestamp: post.creation_date})
         })
     } catch(error) {
         console.log(error)
     }
-}
+} // End of getPosts() function
 
 const populateNewsFeed = async () => {
     let newsFeed = document.querySelector(".newsFeed")
@@ -66,21 +66,20 @@ const populateNewsFeed = async () => {
         
     })
 
-    form.addEventListener("submit", (e) => {
-        e.preventDefault()
-        let addComment = e.target.children[0].value
-        let p = document.createElement("p")
-        p.innerText = addComment
-        
-        
-        debugger
-    })
-    
-}
+    form.addEventListener("submit", addComment);
+} // End of populateNewsFeed() function
+
+const addComment = (e) => {
+    e.preventDefault()
+    let addComment = e.target.children[0].value;
+    let p = document.createElement("p");
+    p.innerText = addComment
+} // End of addComment() function
+
 const setupPage = async () => {
     await getPosts()
     await populateNewsFeed()
-}
+} // End of setupPage() function
 
 setupPage()
 
@@ -88,4 +87,4 @@ search.addEventListener("submit", (e => {
     e.preventDefault();
     sessionStorage.setItem("userQuery", e.target.children[0].value);
     window.location.href = "./pages/searchResults/searchResults.html";
-}))
+})) // End of search event listener
