@@ -51,7 +51,6 @@ const populateNewsFeed = async () => {
         postUser.className = "poster";
         postSection.appendChild(postUser);
 
-        debugger;
         if(Number(userId) === poster.id) {
             let postButtons = document.createElement("section");
             postButtons.className = "postButtons";
