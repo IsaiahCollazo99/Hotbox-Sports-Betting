@@ -16,7 +16,8 @@ let upcomingGames = document.querySelector("#upcomingGames");
 const fetchData = async (url, cb) => {
     try {
         let res = await axios.get(url);
-        await cb(res.data);
+        debugger;
+        cb(res.data);
     } catch(err) {
         console.log(err);
     }
@@ -30,23 +31,24 @@ const getUser = async (data) => {
 const getFollowing = async (data) => {
     let following = data.followings;
 
-    following.forEach(async (user) => {
+    await following.forEach(async (user) => {
         userFollowing[user.id] = user;
         await fetchData(`http://localhost:3000/users/${user.id}/posts`, getUserPosts);
     })
-
-    
+    await populateNewsFeed();
 } // End of getFollowing() function
 
 const getUserPosts = async (data) => {
     let userPosts = data.posts;
-    userPosts.forEach(post => {
+    await userPosts.forEach((post) => {
         posts[post.id] = post;
     })
 } // End of getUserPosts() function
 
 const populateNewsFeed = async () => {
+    newsFeed.innerHTML = "<h1>News Feed</h1>";
     for(let key in posts) {
+        debugger;
         let post = posts[key];
         let poster = userFollowing[post.poster_id];
 
@@ -145,8 +147,8 @@ const addComment = (e) => {
 const setupPage = async () => {
     await fetchData("http://localhost:3000/users/" + userId, getUser);
     await fetchData("http://localhost:3000/users/" + userId + "/followings", getFollowing);
-    await populateNewsFeed()
     await fetchData("http://localhost:3000/events", populateUpcomingGames);
+    await populateNewsFeed();
 } // End of setupPage() function
 
 setupPage()
