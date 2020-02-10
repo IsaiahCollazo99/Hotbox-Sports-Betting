@@ -12,15 +12,6 @@ const fetchData = async (url, cb) => {
     }
 } // End of fetchData() function
 
-const getUser = async () => {
-    try {
-        let res = await axios.get(`http://localhost:3000/users/${userId}/posts`) 
-        
-    } catch(error) {
-        console.log(error)
-    }
-} // End of getUser() function
-
 const getPosts = async () => {
     try {
         let res = await axios.get(`http://localhost:3000/users/${userId}/posts`) 
