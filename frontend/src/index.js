@@ -5,6 +5,11 @@ let posts = {};
 let userFollowing = {};
 let games = {};
 
+// Add Make post functionality
+// Add show Comments/Likes functionality
+// Add Comment/Like functionality
+// Change Button styling
+
 let newsFeed = document.querySelector("#newsFeed");
 let upcomingGames = document.querySelector("#upcomingGames");
 
@@ -47,6 +52,7 @@ const populateNewsFeed = async () => {
 
         let postSection = document.createElement("section");
         postSection.className = "postSection";
+        postSection.id = poster.id;
 
         let postSectionTop = document.createElement("section");
         postSectionTop.className = "postTop";
