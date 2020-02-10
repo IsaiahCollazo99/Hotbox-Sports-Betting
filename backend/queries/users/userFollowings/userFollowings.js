@@ -5,7 +5,7 @@ const getUserFollowings = async (req, res, next) => {
     try {
         let {userId} = req.params;
         if(isUserExisting(userId)) {
-            let followings = await db.any("SELECT * FROM followings WHERE follower_id =$1", userId);
+            let followings = await db.any("SELECT * FROM followings INNER JOIN users ON followings.followed_id=users.id WHERE follower_id =$1", userId);
             res.status(200).json({
                 followings,
                 status: "Success",

@@ -13,7 +13,7 @@ const fetchData = async (url, cb) => {
 } // End of fetchData() function
 
 const getFollowing = (data) => {
-
+    debugger;
 } // End of getFollowing() function
 
 const addComment = (e) => {
@@ -25,7 +25,7 @@ const addComment = (e) => {
 
 const setupPage = async () => {
     await fetchData("http://localhost:3000/users/" + userId + "/followings", getFollowing);
-    await populateNewsFeed()
+    // await populateNewsFeed()
 } // End of setupPage() function
 
 setupPage()
