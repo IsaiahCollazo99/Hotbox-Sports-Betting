@@ -75,8 +75,8 @@ const editPost = async (req, res, next) => {
 
 const createPost = async (req, res, next) => {
     try {
-        let {posterId, body} = req.body;
-        let post = await db.one("INSERT INTO posts (poster_id, body, creation_date) VALUES($1, $2, $3) RETURNING *", [posterId, body, newDate()]);
+        let {poster_id, body} = req.body;
+        let post = await db.one("INSERT INTO posts (poster_id, body, creation_date) VALUES($1, $2, $3) RETURNING *", [poster_id, body, newDate()]);
         successReq(res, post, "Created post");
     } catch (error) {
         next(error);

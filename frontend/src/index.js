@@ -12,6 +12,7 @@ let games = {};
 
 let newsFeed = document.querySelector("#newsFeed");
 let upcomingGames = document.querySelector("#upcomingGames");
+let postForm = document.querySelector("#postForm");
 
 const fetchData = async (url, cb) => {
     try {
@@ -119,6 +120,20 @@ const populateUpcomingGames = async (data) => {
     })
 } // End of populateUpcomingGames() function
 
+const makePost = async (e) => {
+    e.preventDefault();
+    let body = e.target.children[0].value;
+    try {
+        let res = await axios.post("http://localhost:3000/posts", {poster_id: userId, body, creation_date: new Date().toString()});
+        let post = res.data.data;
+        posts[post.id] = post;
+        populateNewsFeed();
+        e.target.children[0].value = "";
+    } catch(err) {
+        console.log(err);
+    }
+} // End of makePost() function
+
 const editPost = (e) => {
 
 } // End of editPost() function
@@ -156,3 +171,5 @@ search.addEventListener("submit", (e => {
     sessionStorage.setItem("userQuery", e.target.children[0].value);
     window.location.href = "./pages/searchResults/searchResults.html";
 })) // End of search event listener
+
+postForm.addEventListener("submit", makePost);
