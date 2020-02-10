@@ -129,12 +129,11 @@ input[type="text"]:focus, input[type="search"]:focus {
     border-radius: 10px;
 }
 
-.nfPosts {
+.postSection {
     background-color: whitesmoke;
     margin-top: 30px;
     padding: 15px;
     width: 70%;
-    height: 75px;
     margin-left: 15%;
 
 
