@@ -134,9 +134,20 @@ const makePost = async (e) => {
     }
 } // End of makePost() function
 
-const submitPostEdit = (e) => {
+const submitPostEdit = async (e) => {
     e.preventDefault();
-    debugger;
+    let form = e.target;
+    let editedBody = form.children[0].value;
+    let postId = form.parentNode.parentNode.id;
+    try {
+        let res = await axios.patch("http://localhost:3000/posts/" + postId, {body: editedBody});
+        let newBody = document.createElement("p");
+        newBody.className = "postBody";
+        newBody.innerText = editedBody;
+        form.parentNode.replaceChild(newBody, form);
+    } catch(err) {
+        console.log(err);
+    }
 } // End of submitPostEdit() function
 
 const editPost = (e) => {
