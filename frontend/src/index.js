@@ -134,8 +134,29 @@ const makePost = async (e) => {
     }
 } // End of makePost() function
 
-const editPost = (e) => {
+const submitPostEdit = (e) => {
+    e.preventDefault();
+    debugger;
+} // End of submitPostEdit() function
 
+const editPost = (e) => {
+    let postBody = e.target.parentNode.parentNode.parentNode.children[1].children[0];
+    let editPostForm = document.createElement("form");
+
+    let editPostInput = document.createElement("input");
+    editPostInput.type = "text";
+    editPostInput.class = "editPostInput";
+    editPostInput.value = postBody.innerText;
+    editPostForm.appendChild(editPostInput);
+
+    let editPostSubmit = document.createElement("input");
+    editPostSubmit.type = "submit";
+    editPostSubmit.class = "editPostSubmit";
+    editPostForm.appendChild(editPostSubmit);
+
+    postBody.parentNode.replaceChild(editPostForm, postBody);
+
+    editPostForm.addEventListener("submit", submitPostEdit);
 } // End of editPost() function
 
 const deletePost = async (e) => {
