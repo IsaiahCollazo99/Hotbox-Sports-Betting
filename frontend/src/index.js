@@ -142,6 +142,7 @@ const deletePost = async (e) => {
     let post = e.target.parentNode.parentNode.parentNode;
     try {
         let res = await axios.delete("http://localhost:3000/posts/" + post.id);
+        delete posts[post.id];
         populateNewsFeed();
     } catch(err) {
         console.log(err);
