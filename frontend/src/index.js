@@ -53,7 +53,7 @@ const populateNewsFeed = async () => {
 
         let postSection = document.createElement("section");
         postSection.className = "postSection";
-        postSection.id = poster.id;
+        postSection.id = post.id;
 
         let postSectionTop = document.createElement("section");
         postSectionTop.className = "postTop";
@@ -138,8 +138,14 @@ const editPost = (e) => {
 
 } // End of editPost() function
 
-const deletePost = (e) => {
-
+const deletePost = async (e) => {
+    let post = e.target.parentNode.parentNode.parentNode;
+    try {
+        let res = await axios.delete("http://localhost:3000/posts/" + post.id);
+        populateNewsFeed();
+    } catch(err) {
+        console.log(err);
+    }
 } // End of deletePost() function
 
 const showComments = (e) => {
